@@ -1,0 +1,89 @@
+// MainApp.java
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * Main application that collects and validates user input.
+ */
+public class MainApp {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<User> users = new ArrayList<>();
+
+        boolean continueInput = true;
+
+        while (continueInput) {
+
+            String name = "";
+            int age = 0;
+            String email = "";
+            String phone = "";
+
+            // NAME INPUT
+            while (true) {
+                try {
+                    System.out.print("Enter name: ");
+                    name = UserInputValidator.validateName(scanner.nextLine());
+                    break;
+                } catch (InvalidInputException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+
+            // AGE INPUT
+            while (true) {
+                try {
+                    System.out.print("Enter age: ");
+                    age = UserInputValidator.validateAge(scanner.nextLine());
+                    break;
+                } catch (InvalidInputException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+
+            // EMAIL INPUT
+            while (true) {
+                try {
+                    System.out.print("Enter email: ");
+                    email = UserInputValidator.validateEmail(scanner.nextLine());
+                    break;
+                } catch (InvalidInputException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+
+            // PHONE INPUT
+            while (true) {
+                try {
+                    System.out.print("Enter phone (10 digits): ");
+                    phone = UserInputValidator.validatePhone(scanner.nextLine());
+                    break;
+                } catch (InvalidInputException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+
+            // Store user
+            users.add(new User(name, age, email, phone));
+
+            // Ask to continue
+            System.out.print("Add another user? (yes/no): ");
+            String response = scanner.nextLine();
+
+            if (!response.equalsIgnoreCase("yes")) {
+                continueInput = false;
+            }
+        }
+
+        // Display all users
+        System.out.println("\n--- All Users ---");
+        for (User user : users) {
+            System.out.println(user);
+        }
+
+        scanner.close();
+    }
+}
