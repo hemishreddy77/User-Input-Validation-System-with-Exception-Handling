@@ -1,0 +1,11 @@
+// InvalidInputException.java
+
+/**
+ * Custom exception used for input validation errors.
+ */
+public class InvalidInputException extends Exception {
+
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
