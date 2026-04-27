@@ -1,0 +1,45 @@
+// UserInputValidator.java
+
+/**
+ * This class contains static methods to validate user input fields.
+ */
+public class UserInputValidator {
+
+    // Validate Name
+    public static String validateName(String name) throws InvalidInputException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new InvalidInputException("Name cannot be empty.");
+        }
+        return name.trim();
+    }
+
+    // Validate Age
+    public static int validateAge(String ageInput) throws InvalidInputException {
+        try {
+            int age = Integer.parseInt(ageInput);
+            if (age < 0) {
+                throw new InvalidInputException("Age must be a non-negative integer.");
+            }
+            return age;
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("Age must be a valid number.");
+        }
+    }
+
+    // Validate Email
+    public static String validateEmail(String email) throws InvalidInputException {
+        if (email == null || !email.contains("@") ||
+           !(email.endsWith(".com") || email.endsWith(".edu"))) {
+            throw new InvalidInputException("Email must contain '@' and end with .com or .edu.");
+        }
+        return email;
+    }
+
+    // Validate Phone Number
+    public static String validatePhone(String phone) throws InvalidInputException {
+        if (phone == null || !phone.matches("\\d{10}")) {
+            throw new InvalidInputException("Phone number must be exactly 10 digits.");
+        }
+        return phone;
+    }
+}
